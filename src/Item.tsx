@@ -54,11 +54,7 @@ export default (props: ItemProps) => {
       draggable={true}
       onDragStart={handleDragStart}
       // onDragEnd={handleDragEnd}
-      className={`
-        item
-        item--${props.status}
-        ${isEditing ? 'item--is_editing' : ''}
-      `}
+      className={`item item--${props.status}`}
     >
       <div className="item__actions">
         {!isEditing &&
