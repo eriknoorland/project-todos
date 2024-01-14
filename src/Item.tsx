@@ -16,7 +16,7 @@ export default (props: ItemProps) => {
   const [editData, setEditData] = useState(props.data);
 
   function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
-    event.dataTransfer.setData('itemId', props.data.id.toString());
+    event.dataTransfer.setData('itemId', props.data.id);
     setIsGrabbing(true);
   }
 

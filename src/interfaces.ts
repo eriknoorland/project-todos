@@ -1,7 +1,7 @@
 import { ItemPriority, ItemStatus } from './types';
 
 export interface ItemData {
-  id: number;
+  id: string;
   title: string;
   description: string;
   status: ItemStatus;

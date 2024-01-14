@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Column from './Column';
 import { ItemData } from './interfaces';
 import { ItemStatus } from './types';
@@ -15,7 +16,7 @@ function App() {
 
   function handleItemDrop(itemId: string, status: string): void {
     setItems(items.map(item => {
-      if (item.id === parseInt(itemId, 10)) {
+      if (item.id === itemId) {
         item.status = status as ItemStatus;
       }
 
@@ -39,7 +40,7 @@ function App() {
 
   function handleCreateClick() {
     const item: ItemData = {
-      id: items.length + 1,
+      id: uuidv4(),
       title: '{placeholder_title}',
       description: '{placeholder_description}',
       status: 'open',
