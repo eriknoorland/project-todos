@@ -43,6 +43,7 @@ function App() {
       title: '{placeholder_title}',
       description: '{placeholder_description}',
       status: 'open',
+      priority: 'low',
     };
 
     setItems([...items, item]);

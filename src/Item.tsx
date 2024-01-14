@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ItemData } from './interfaces';
-import { ItemStatus } from './types';
+import { ItemPriority, ItemStatus } from './types';
 import './Item.scss';
 
 interface ItemProps {
@@ -12,6 +12,7 @@ interface ItemProps {
 
 export default (props: ItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [priority, setPriority] = useState(props.data.priority);
   const [title, setTitle] = useState(props.data.title);
   const [description, setDescription] = useState(props.data.description);
 
@@ -35,10 +36,15 @@ export default (props: ItemProps) => {
       ...props.data,
       title,
       description,
+      priority,
     };
 
     props.onItemEdit(editedItem);
     setIsEditing(false);
+  }
+
+  function handlePriorityChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setPriority(event.target.value as ItemPriority);
   }
 
   function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -56,22 +62,39 @@ export default (props: ItemProps) => {
       // onDragEnd={handleDragEnd}
       className={`item item--${props.status}`}
     >
-      <div className="item__actions">
-        {!isEditing &&
+      <div className="item__header">
+        <div className="item__priorityLabel">
+          {!isEditing && <>Priority: {props.data.priority}</>}
+
+          {isEditing && 
+            <select
+              defaultValue={props.data.priority}
+              onChange={handlePriorityChange}
+            >
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          }
+        </div>
+
+        <div className="item__actions">
+          {!isEditing &&
+            <span
+              className="item__editAction"
+              onClick={handleEditClick}
+            >
+              edit
+            </span>
+          }
+
           <span
             className="item__editAction"
-            onClick={handleEditClick}
+            onClick={handleDeleteClick}
           >
-            edit
+            delete
           </span>
-        }
-
-        <span
-          className="item__editAction"
-          onClick={handleDeleteClick}
-        >
-          delete
-        </span>
+        </div>
       </div>
 
       <div className="item__title">

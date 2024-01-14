@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from 'react';
 import { ItemData } from './interfaces';
 import Item from './Item';
-import { ItemStatus } from './types';
+import { ItemPriority, ItemStatus } from './types';
 import './Column.scss';
 
 interface ColumnProps extends PropsWithChildren {
@@ -14,6 +14,7 @@ interface ColumnProps extends PropsWithChildren {
 
 const Column = (props: ColumnProps) => {
   const filteredItems = props.items.filter(item => item.status === props.status);
+  const sortedItems = [...filteredItems].sort(sortByPriority);
   const [showDropPlaceholder, setShowDropPlaceholder] = useState(false);
 
   function handleDragEnter(event: React.DragEvent<HTMLDivElement>) {
@@ -38,6 +39,22 @@ const Column = (props: ColumnProps) => {
     setShowDropPlaceholder(false);
   }
 
+  function sortByPriority(a: ItemData, b: ItemData) {
+    const priorities: ItemPriority[] = ['low', 'medium', 'high'];
+    const indexA = priorities.indexOf(a.priority);
+    const indexB = priorities.indexOf(b.priority);
+
+    if (indexA < indexB) {
+      return 1;
+    }
+    
+    if (indexA > indexB) {
+      return -1;
+    }
+
+    return 0;
+  }
+
   return (
     <div
       onDragEnter={handleDragEnter}
@@ -50,7 +67,7 @@ const Column = (props: ColumnProps) => {
         {props.status} ({ filteredItems.length })
       </div>
 
-      {filteredItems.map(item => {
+      {sortedItems.map(item => {
         return <Item
           key={item.id}
           data={item}

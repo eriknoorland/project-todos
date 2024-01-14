@@ -22,14 +22,21 @@
   }
 }
 
+.item__header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 8px 0;
+}
+
+.item__priorityLabel {
+  font-size: 14px;
+}
+
 .item__actions {
-  display: none;
-  position: absolute;
-  top: 12px;
-  right: 12px;
+  visibility: hidden;
 
   .item:hover & {
-    display: block;
+    visibility: visible;
   }
 }
 
