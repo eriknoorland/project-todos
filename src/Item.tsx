@@ -6,6 +6,7 @@ import './Item.scss';
 interface ItemProps {
   data: ItemData;
   status: ItemStatus;
+  className?: string;
   onItemEdit: (item: ItemData) => void;
   onItemDelete: (item: ItemData) => void;
 };
@@ -55,6 +56,7 @@ export default (props: ItemProps) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       className={`
+        ${props.className}
         item
         item--${props.status}
         ${isGrabbing ? 'item--is_grabbing' : ''}

@@ -56,32 +56,29 @@ const Column = (props: ColumnProps) => {
   }
 
   return (
-    <div
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      className="column"
-    >
+    <div className="column">
       <div className="column__title">
         {props.status.replace('_', ' ')} ({ filteredItems.length })
       </div>
 
-      {sortedItems.map(item => {
-        return <Item
-          key={item.id}
-          data={item}
-          status={props.status}
-          onItemEdit={props.onItemEdit}
-          onItemDelete={props.onItemDelete}
-        />
-      })}
-
-      {showDropPlaceholder &&
-        <div className="column__dropPlaceholder">
-          Move item to {props.status}
-        </div>
-      }
+      <div
+        className={`column__dropZone ${showDropPlaceholder ? 'column__dropZone--active' : ''}`}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
+        {sortedItems.map(item => {
+          return <Item
+            className="column__item"
+            key={item.id}
+            data={item}
+            status={props.status}
+            onItemEdit={props.onItemEdit}
+            onItemDelete={props.onItemDelete}
+          />
+        })}
+      </div>
     </div>
   );
 };

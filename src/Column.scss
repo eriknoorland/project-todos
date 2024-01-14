@@ -1,19 +1,33 @@
 .column {
-  padding: 0 8px;
-  height: 100%;
-  border-left: 1px solid rgba(grey, 0.25);
-  border-right: 1px solid rgba(grey, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(grey, 0.08);
+  background: #f2f2f2;
 }
 
 .column__title {
-  margin: 0 0 16px 0;
+  flex: 0 0 auto;
+  margin: 8px 8px 16px 16px;
   font-weight: bold;
   text-transform: capitalize;
 }
 
-.column__dropPlaceholder {
-  padding: 16px;
+.column__dropZone {
+  flex: 1 1 auto;
+  border: 2px dashed #f2f2f2;
   border-radius: 10px;
-  border: 2px dashed grey;
-  opacity: 0.5;
+
+  &--active {
+    border-color: rgba(grey, 0.5);
+  }
+}
+
+.column__item {
+  margin: 0 0 8px 0;
+
+  &:last-child {
+    margin: 0;
+  }
 }
