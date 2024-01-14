@@ -20,6 +20,10 @@
     border-color: rgba(#D1F5A5, 1);
     background: rgba(#D1F5A5, 0.4);
   }
+
+  &--is_grabbing {
+    cursor: grabbing;
+  }
 }
 
 .item__header {

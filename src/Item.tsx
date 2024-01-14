@@ -11,15 +11,18 @@ interface ItemProps {
 };
 
 export default (props: ItemProps) => {
+  const [isGrabbing, setIsGrabbing] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(props.data);
 
   function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
     event.dataTransfer.setData('itemId', props.data.id.toString());
+    setIsGrabbing(true);
   }
 
-  // function handleDragEnd(event: React.DragEvent<HTMLDivElement>) {
-  // }
+  function handleDragEnd(event: React.DragEvent<HTMLDivElement>) {
+    setIsGrabbing(false);
+  }
 
   function handleEditClick() {
     setIsEditing(true);
@@ -50,8 +53,12 @@ export default (props: ItemProps) => {
     <div
       draggable={true}
       onDragStart={handleDragStart}
-      // onDragEnd={handleDragEnd}
-      className={`item item--${props.status}`}
+      onDragEnd={handleDragEnd}
+      className={`
+        item
+        item--${props.status}
+        ${isGrabbing ? 'item--is_grabbing' : ''}
+      `}
     >
       <div className="item__header">
         <div className="item__priorityLabel">
