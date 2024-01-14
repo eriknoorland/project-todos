@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ItemData } from './interfaces';
-import { ItemPriority, ItemStatus } from './types';
+import { ItemStatus } from './types';
 import './Item.scss';
 
 interface ItemProps {
@@ -12,9 +12,7 @@ interface ItemProps {
 
 export default (props: ItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [priority, setPriority] = useState(props.data.priority);
-  const [title, setTitle] = useState(props.data.title);
-  const [description, setDescription] = useState(props.data.description);
+  const [editData, setEditData] = useState(props.data);
 
   function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
     event.dataTransfer.setData('itemId', props.data.id.toString());
@@ -34,25 +32,18 @@ export default (props: ItemProps) => {
   function handleSaveClick() {
     const editedItem = {
       ...props.data,
-      title,
-      description,
-      priority,
+      ...editData,
     };
 
     props.onItemEdit(editedItem);
     setIsEditing(false);
   }
 
-  function handlePriorityChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    setPriority(event.target.value as ItemPriority);
-  }
-
-  function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-  }
-
-  function handleDescriptionChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setDescription(event.target.value);
+  function handleOnInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setEditData({
+      ...editData,
+      [event.target.name]: event.target.value,
+    });
   }
 
   return (
@@ -64,12 +55,13 @@ export default (props: ItemProps) => {
     >
       <div className="item__header">
         <div className="item__priorityLabel">
-          {!isEditing && <>Priority: {props.data.priority}</>}
+          {!isEditing && <>Priority: {editData.priority}</>}
 
           {isEditing && 
             <select
-              defaultValue={props.data.priority}
-              onChange={handlePriorityChange}
+              name="priority"
+              defaultValue={editData.priority}
+              onChange={handleOnInputChange}
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -98,30 +90,32 @@ export default (props: ItemProps) => {
       </div>
 
       <div className="item__title">
-        {!isEditing && title }
+        {!isEditing && editData.title }
 
         {isEditing &&
           <input
             type="text"
+            name="title"
             className="item__titleInput"
-            defaultValue={title}
-            onChange={handleTitleChange}
+            defaultValue={editData.title}
+            onChange={handleOnInputChange}
           />
         }
       </div>
 
       {!isEditing &&
         <p className="item__description">
-          {description}
+          {editData.description}
         </p>
       }
 
       {isEditing &&
         <div>
           <textarea
+            name="description"
             className="item__descriptionInput"
-            defaultValue={description}
-            onChange={handleDescriptionChange}
+            defaultValue={editData.description}
+            onChange={handleOnInputChange}
           />
         </div>
       }
