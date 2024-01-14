@@ -64,7 +64,7 @@ const Column = (props: ColumnProps) => {
       className="column"
     >
       <div className="column__title">
-        {props.status} ({ filteredItems.length })
+        {props.status.replace('_', ' ')} ({ filteredItems.length })
       </div>
 
       {sortedItems.map(item => {
