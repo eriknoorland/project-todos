@@ -25,33 +25,6 @@
   }
 }
 
-.item__header {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 0 8px 0;
-}
-
-.item__priorityLabel {
-  font-size: 14px;
-  text-transform: capitalize;
-}
-
-.item__actions {
-  visibility: hidden;
-
-  .item:hover & {
-    visibility: visible;
-  }
-}
-
-.item__editAction,
-.item__deleteAction {
-  margin: 0 4px;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .item__title {
   margin: 0 0 8px 0;
   font-weight: bold;
@@ -73,6 +46,33 @@
   width: 100%;
   height: 60px;
   font-size: 14px;
+}
+
+.item__footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0 0 0;
+}
+
+.item__priorityLabel {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.item__actions {
+  visibility: hidden;
+
+  .item:hover & {
+    visibility: visible;
+  }
+}
+
+.item__editAction,
+.item__deleteAction {
+  margin: 0 4px;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .item__saveButton {

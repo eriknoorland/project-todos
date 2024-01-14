@@ -62,7 +62,39 @@ export default (props: ItemProps) => {
         ${isGrabbing ? 'item--is_grabbing' : ''}
       `}
     >
-      <div className="item__header">
+      <div className="item__title">
+        {!isEditing && editData.title }
+
+        {isEditing &&
+          <input
+            type="text"
+            name="title"
+            className="item__titleInput"
+            defaultValue={editData.title}
+            onChange={handleOnInputChange}
+          />
+        }
+      </div>
+
+      {!isEditing &&
+        <p className="item__description">
+          {editData.description}
+        </p>
+      }
+
+      {isEditing &&
+        <div>
+          <textarea
+            name="description"
+            className="item__descriptionInput"
+            defaultValue={editData.description}
+            onChange={handleOnInputChange}
+          />
+        </div>
+      }
+
+
+      <div className="item__footer">
         <div className="item__priorityLabel">
           {!isEditing && <>Priority: {editData.priority}</>}
 
@@ -97,37 +129,6 @@ export default (props: ItemProps) => {
           </span>
         </div>
       </div>
-
-      <div className="item__title">
-        {!isEditing && editData.title }
-
-        {isEditing &&
-          <input
-            type="text"
-            name="title"
-            className="item__titleInput"
-            defaultValue={editData.title}
-            onChange={handleOnInputChange}
-          />
-        }
-      </div>
-
-      {!isEditing &&
-        <p className="item__description">
-          {editData.description}
-        </p>
-      }
-
-      {isEditing &&
-        <div>
-          <textarea
-            name="description"
-            className="item__descriptionInput"
-            defaultValue={editData.description}
-            onChange={handleOnInputChange}
-          />
-        </div>
-      }
 
       {isEditing &&
         <button
