@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { ItemData } from './interfaces';
 import { ItemStatus } from './types';
 import './Item.scss';
@@ -15,6 +17,12 @@ export default (props: ItemProps) => {
   const [isGrabbing, setIsGrabbing] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(props.data);
+
+  const priorityIcon = {
+    low: faArrowDown,
+    medium: faArrowUp,
+    high: faArrowUp,
+  };
 
   function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
     event.dataTransfer.setData('itemId', props.data.id);
@@ -93,10 +101,19 @@ export default (props: ItemProps) => {
         </div>
       }
 
-
       <div className="item__footer">
         <div className="item__priorityLabel">
-          {!isEditing && <>Priority: {editData.priority}</>}
+          {!isEditing &&
+            <div className="item__priorityIconWrapper">
+              <FontAwesomeIcon
+                icon={priorityIcon[editData.priority]}
+                className={`
+                  item__priorityIcon
+                  item__priorityIcon--${editData.priority}
+                `}
+              />
+            </div>
+          }
 
           {isEditing && 
             <select
@@ -117,15 +134,15 @@ export default (props: ItemProps) => {
               className="item__editAction"
               onClick={handleEditClick}
             >
-              edit
+              <FontAwesomeIcon icon={faPenToSquare} />
             </span>
           }
 
           <span
-            className="item__editAction"
+            className="item__deleteAction"
             onClick={handleDeleteClick}
           >
-            delete
+            <FontAwesomeIcon icon={faTrash} />
           </span>
         </div>
       </div>

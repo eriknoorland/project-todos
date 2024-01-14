@@ -19,6 +19,10 @@
   }
 }
 
+.createButton__icon {
+  margin: 0 8px 0 0;
+}
+
 .columns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

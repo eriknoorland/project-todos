@@ -51,12 +51,37 @@
 .item__footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 16px 0 0 0;
 }
 
 .item__priorityLabel {
   font-size: 14px;
   text-transform: capitalize;
+}
+
+.item__priorityIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: rgba(#fff, 0.5);
+}
+
+.item__priorityIcon {
+  &--low {
+    color: green;
+  }
+
+  &--medium {
+    color: orange;
+  }
+
+  &--high {
+    color: red;
+  }
 }
 
 .item__actions {
@@ -70,9 +95,13 @@
 .item__editAction,
 .item__deleteAction {
   margin: 0 4px;
-  font-size: 14px;
-  text-decoration: underline;
+  opacity: 0.85;
   cursor: pointer;
+  transition: opacity 0.25s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .item__saveButton {

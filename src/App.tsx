@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Column from './Column';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ItemData } from './interfaces';
 import { ItemStatus } from './types';
+import Column from './Column';
 import './App.scss';
 
 function App() {
@@ -57,7 +59,12 @@ function App() {
           className="createButton"
           onClick={handleCreateClick}
         >
-          + Create new item
+          <FontAwesomeIcon
+            className="createButton__icon"
+            icon={faPlus}
+          />
+          
+          Create new item
         </button>
       </header>
 
