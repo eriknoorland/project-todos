@@ -1,0 +1,1 @@
+export type ItemStatus = 'open' | 'in_progress' | 'done';

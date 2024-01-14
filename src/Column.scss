@@ -1,0 +1,18 @@
+.column {
+  padding: 0 8px;
+  height: 100%;
+  border-left: 1px solid rgba(grey, 0.25);
+  border-right: 1px solid rgba(grey, 0.25);
+}
+
+.column__title {
+  margin: 0 0 16px 0;
+  font-weight: bold;
+}
+
+.column__dropPlaceholder {
+  padding: 16px;
+  border-radius: 10px;
+  border: 2px dashed grey;
+  opacity: 0.5;
+}

@@ -1,24 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import Column from './Column';
+import { ItemData } from './interfaces';
+import { ItemStatus } from './types';
+import './App.scss';
 
 function App() {
+  const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
+  const columnStatuses = ['open', 'in_progress', 'done'];
+  const [items, setItems] = useState<ItemData[]>(initialItemsState);
+
+  useEffect(() => {
+    window.localStorage.setItem('projectTodos', JSON.stringify(items));
+  }, [items]);
+
+  function handleItemDrop(itemId: string, status: string): void {
+    setItems(items.map(item => {
+      if (item.id === parseInt(itemId, 10)) {
+        item.status = status as ItemStatus;
+      }
+
+      return item;
+    }));
+  }
+
+  function handleItemEdit(editedItem: ItemData) {
+    setItems(items.map(item => {
+      if (editedItem.id === item.id) {
+        return editedItem;
+      }
+
+      return item;
+    }));
+  }
+
+  function handleCreateClick() {
+    const item: ItemData = {
+      id: items.length + 1,
+      title: '{placeholder_title}',
+      description: '{placeholder_description}',
+      status: 'open',
+    };
+
+    setItems([...items, item]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="app">
+      <header className="header">
+        <button
+          className="createButton"
+          onClick={handleCreateClick}
         >
-          Learn React
-        </a>
+          + Create new item
+        </button>
       </header>
+
+      <div className="columns">
+        {columnStatuses.map(columnStatus => {
+          return <Column
+            status={columnStatus as ItemStatus}
+            key={columnStatus}
+            items={items}
+            onItemDrop={handleItemDrop}
+            onItemEdit={handleItemEdit}
+          />;
+        })}
+      </div>
     </div>
   );
 }
