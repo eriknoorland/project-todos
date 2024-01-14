@@ -7,6 +7,7 @@ interface ItemProps {
   data: ItemData;
   status: ItemStatus;
   onItemEdit: (item: ItemData) => void;
+  onItemDelete: (item: ItemData) => void;
 };
 
 export default (props: ItemProps) => {
@@ -25,8 +26,11 @@ export default (props: ItemProps) => {
     setIsEditing(true);
   }
 
+  function handleDeleteClick() {
+    props.onItemDelete(props.data);
+  }
+
   function handleSaveClick() {
-    // FIXME send up to app component
     const editedItem = {
       ...props.data,
       title,
@@ -56,14 +60,23 @@ export default (props: ItemProps) => {
         ${isEditing ? 'item--is_editing' : ''}
       `}
     >
-      {!isEditing &&
-        <div
-          className="item__editLink"
-          onClick={handleEditClick}
+      <div className="item__actions">
+        {!isEditing &&
+          <span
+            className="item__editAction"
+            onClick={handleEditClick}
+          >
+            edit
+          </span>
+        }
+
+        <span
+          className="item__editAction"
+          onClick={handleDeleteClick}
         >
-          edit
-        </div>
-      }
+          delete
+        </span>
+      </div>
 
       <div className="item__title">
         {!isEditing && title }

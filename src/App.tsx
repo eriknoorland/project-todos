@@ -33,6 +33,10 @@ function App() {
     }));
   }
 
+  function handleItemDelete(deleteItem: ItemData) {
+    setItems(items.filter(item => item.id !== deleteItem.id));
+  }
+
   function handleCreateClick() {
     const item: ItemData = {
       id: items.length + 1,
@@ -63,6 +67,7 @@ function App() {
             items={items}
             onItemDrop={handleItemDrop}
             onItemEdit={handleItemEdit}
+            onItemDelete={handleItemDelete}
           />;
         })}
       </div>

@@ -22,18 +22,23 @@
   }
 }
 
-.item__editLink {
+.item__actions {
   display: none;
   position: absolute;
   top: 12px;
   right: 12px;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
 
   .item:hover & {
     display: block;
   }
+}
+
+.item__editAction,
+.item__deleteAction {
+  margin: 0 4px;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .item__title {

@@ -9,6 +9,7 @@ interface ColumnProps extends PropsWithChildren {
   status: ItemStatus;
   onItemDrop: (itemId: string, status: string) => void;
   onItemEdit: (item: ItemData) => void;
+  onItemDelete: (item: ItemData) => void;
 };
 
 const Column = (props: ColumnProps) => {
@@ -55,6 +56,7 @@ const Column = (props: ColumnProps) => {
           data={item}
           status={props.status}
           onItemEdit={props.onItemEdit}
+          onItemDelete={props.onItemDelete}
         />
       })}
 
