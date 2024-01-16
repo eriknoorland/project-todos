@@ -1,0 +1,30 @@
+.button {
+  --backgroundColor: 43, 128, 197; // #2B80C5
+  --color: 255, 255, 255;
+
+  padding: 12px 24px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(var(--backgroundColor));
+  color: rgb(var(--color));
+  font-size: 16px;
+  appearance: none;
+  cursor: pointer;
+  transition: background .25s;
+
+  &:hover {
+    background-color: rgba(var(--backgroundColor), 0.85);
+  }
+
+  &--action {
+    --backgroundColor: 43, 128, 197; // #2B80C5
+  }
+
+  &--submit {
+    --backgroundColor: 112, 197, 43; // #70C52B
+  }
+
+  &--cancel {
+    --backgroundColor: 185, 188, 184; // #B9BCB8
+  }
+}
