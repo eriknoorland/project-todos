@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ItemData } from './interfaces';
 import { ItemStatus } from './types';
 import Column from './Column';
+import Button from './Button';
+import CreateItemModal from './CreateItemModal';
 import './App.scss';
 
 function App() {
   const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
   const columnStatuses = ['open', 'in_progress', 'done'];
   const [items, setItems] = useState<ItemData[]>(initialItemsState);
+  const [isCreateItemModalOpen, setIsCreateItemModalOpen] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem('projectTodos', JSON.stringify(items));
@@ -40,22 +42,28 @@ function App() {
     setItems(items.filter(item => item.id !== deleteItem.id));
   }
 
-  function handleCreateClick() {
-    const item: ItemData = {
-      id: uuidv4(),
-      title: '{placeholder_title}',
-      description: '{placeholder_description}',
-      status: 'open',
-      priority: 'low',
-    };
-
+  function handleItemAdd(item: ItemData) {
     setItems([...items, item]);
+    setIsCreateItemModalOpen(false);
+  }
+
+  function handleCreateItemCancel() {
+    setIsCreateItemModalOpen(false);
+  }
+
+  function handleCreateClick() {
+    setIsCreateItemModalOpen(true);
+  }
+
+  function handleCreateItemModalClose() {
+    setIsCreateItemModalOpen(false);
   }
 
   return (
     <div className="app">
       <header className="header">
-        <button
+        <Button
+          modifiers="action"
           className="createButton"
           onClick={handleCreateClick}
         >
@@ -65,7 +73,7 @@ function App() {
           />
           
           Create new item
-        </button>
+        </Button>
       </header>
 
       <div className="columns">
@@ -80,6 +88,13 @@ function App() {
           />;
         })}
       </div>
+
+      <CreateItemModal
+        isOpen={isCreateItemModalOpen}
+        onClose={handleCreateItemModalClose}
+        onItemAdd={handleItemAdd}
+        onCancel={handleCreateItemCancel}
+      />
     </div>
   );
 }
