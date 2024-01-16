@@ -1,6 +1,5 @@
 import { PropsWithChildren, useState } from 'react';
-import { ItemData } from './interfaces';
-import { ItemPriority, ItemStatus } from './types';
+import { ItemData, ItemPriority, ItemStatus } from '../types';
 import Item from './Item';
 import './Column.scss';
 

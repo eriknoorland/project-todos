@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Modal, { ModalProps } from './Modal';
 import Button from './Button';
-import { ItemData } from './interfaces';
-import { ItemStatus } from './types';
+import { ItemData, ItemStatus } from '../types';
 import './CreateItemModal.scss';
 
 interface CreateItemModalProps extends ModalProps {

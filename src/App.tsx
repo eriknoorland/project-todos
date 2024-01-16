@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ItemData } from './interfaces';
-import { ItemStatus } from './types';
-import Column from './Column';
-import Button from './Button';
-import CreateItemModal from './CreateItemModal';
+import { ItemData, ItemStatus } from './types';
+import Column from './components/Column';
+import Button from './components/Button';
+import CreateItemModal from './components/CreateItemModal';
 import './App.scss';
 
 function App() {

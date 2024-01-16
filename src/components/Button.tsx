@@ -1,4 +1,4 @@
-import modifiers from './modifiers';
+import modifiers from '../utils/modifiers';
 import './Button.scss';
 
 interface ButtonProps extends React.PropsWithChildren {
