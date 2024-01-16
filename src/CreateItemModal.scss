@@ -1,0 +1,17 @@
+.createItemModal__title {
+  margin: 0 0 24px 0;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.createItemModal__buttons {
+  margin-top: 32px !important;
+}
+
+.createItemModal__button {
+  margin: 0 16px 0 0;
+
+  &:last-child {
+    margin: 0;
+  }
+}
