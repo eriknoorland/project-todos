@@ -17,11 +17,11 @@ const Column = (props: ColumnProps) => {
   const sortedItems = [...filteredItems].sort(sortByPriority);
   const [showDropPlaceholder, setShowDropPlaceholder] = useState(false);
 
-  function handleDragEnter(event: React.DragEvent<HTMLDivElement>) {
+  function handleDragEnter() {
     setShowDropPlaceholder(true);
   }
 
-  function handleDragLeave(event: React.DragEvent<HTMLDivElement>) {
+  function handleDragLeave() {
     setShowDropPlaceholder(false);
   }
 
