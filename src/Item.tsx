@@ -13,7 +13,7 @@ interface ItemProps {
   onItemDelete: (item: ItemData) => void;
 };
 
-export default (props: ItemProps) => {
+const Item = (props: ItemProps) => {
   const [isGrabbing, setIsGrabbing] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(props.data);
@@ -158,3 +158,5 @@ export default (props: ItemProps) => {
     </div>
   );
 };
+
+export default Item;
