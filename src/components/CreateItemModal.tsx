@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Modal, { ModalProps } from './Modal';
 import Button from './Button';
 import { ItemData, ItemStatus } from '../types';
+import itemTypes from '../data/itemTypes.json';
+import itemPriorities from '../data/itemPriorities.json';
 import './CreateItemModal.scss';
 
 interface CreateItemModalProps extends ModalProps {
@@ -101,9 +103,14 @@ const CreateItemModal = (props: CreateItemModalProps) => {
               name="type"
               className="form__elementSelect"
             >
-              <option value="task">Task</option>
-              <option value="feature">Feature</option>
-              <option value="bug">Bug</option>
+              {itemTypes.map((type) => {
+                return <option
+                  key={type.id}
+                  value={type.value}
+                >
+                  {type.name}
+                </option>
+              })}
             </select>
           </div>
 
@@ -120,9 +127,14 @@ const CreateItemModal = (props: CreateItemModalProps) => {
               name="priority"
               className="form__elementSelect"
             >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
+              {itemPriorities.map((priority) => {
+                return <option
+                  key={priority.id}
+                  value={priority.value}
+                >
+                  {priority.name}
+                </option>
+              })}
             </select>
           </div>
 

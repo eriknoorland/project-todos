@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { ItemData, ItemStatus } from '../types';
+import itemTypes from '../data/itemTypes.json';
+import itemPriorities from '../data/itemPriorities.json';
 import './Item.scss';
 
 interface ItemProps {
@@ -115,9 +117,14 @@ const Item = (props: ItemProps) => {
               onChange={handleOnInputChange}
               className="item__select"
             >
-              <option value="task">Task</option>
-              <option value="feature">Feature</option>
-              <option value="bug">Bug</option>
+              {itemTypes.map((type) => {
+                return <option
+                  key={type.id}
+                  value={type.value}
+                >
+                  {type.name}
+                </option>
+              })}
             </select>
           }
 
@@ -141,9 +148,14 @@ const Item = (props: ItemProps) => {
                 onChange={handleOnInputChange}
                 className="item__select"
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                {itemPriorities.map((priority) => {
+                return <option
+                  key={priority.id}
+                  value={priority.value}
+                >
+                  {priority.name}
+                </option>
+              })}
               </select>
             }
           </div>

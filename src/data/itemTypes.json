@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Task",
+    "value": "task"
+  },
+  {
+    "id": 2,
+    "name": "Feature",
+    "value": "feature"
+  },
+  {
+    "id": 3,
+    "name": "Bug",
+    "value": "bug"
+  }
+]
