@@ -42,6 +42,11 @@ const Item = (props: ItemProps) => {
     props.onItemDelete(props.data);
   }
 
+  function handleCancelClick() {
+    setEditData(props.data);
+    setIsEditing(false);
+  }
+
   function handleSaveClick() {
     const editedItem = {
       ...props.data,
@@ -181,12 +186,21 @@ const Item = (props: ItemProps) => {
       </div>
 
       {isEditing &&
-        <button
-          className="item__saveButton"
-          onClick={handleSaveClick}
-        >
-          Save
-        </button>
+        <div className="item__buttons">
+          <button
+            className="item__cancelButton"
+            onClick={handleCancelClick}
+          >
+            Cancel
+          </button>
+
+          <button
+            className="item__saveButton"
+            onClick={handleSaveClick}
+          >
+            Save
+          </button>
+        </div>
       }
     </div>
   );
