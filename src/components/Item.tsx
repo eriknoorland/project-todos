@@ -101,30 +101,52 @@ const Item = (props: ItemProps) => {
       }
 
       <div className="item__footer">
-        <div className="item__priorityLabel">
+        <div className="item__footerLabels">
           {!isEditing &&
-            <div className="item__priorityIconWrapper">
-              <FontAwesomeIcon
-                icon={priorityIcon[editData.priority]}
-                className={`
-                  item__priorityIcon
-                  item__priorityIcon--${editData.priority}
-                `}
-              />
+            <div className="item__typeLabel">
+              {editData.type}
             </div>
           }
 
-          {isEditing && 
+          {isEditing &&
             <select
-              name="priority"
-              defaultValue={editData.priority}
+              name="type"
+              defaultValue={editData.type}
               onChange={handleOnInputChange}
+              className="item__select"
             >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
+              <option value="task">Task</option>
+              <option value="feature">Feature</option>
+              <option value="bug">Bug</option>
             </select>
           }
+
+          <div className="item__priorityLabel">
+            {!isEditing &&
+              <div className="item__priorityIconWrapper">
+                <FontAwesomeIcon
+                  icon={priorityIcon[editData.priority]}
+                  className={`
+                    item__priorityIcon
+                    item__priorityIcon--${editData.priority}
+                  `}
+                />
+              </div>
+            }
+
+            {isEditing && 
+              <select
+                name="priority"
+                defaultValue={editData.priority}
+                onChange={handleOnInputChange}
+                className="item__select"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            }
+          </div>
         </div>
 
         <div className="item__actions">

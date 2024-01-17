@@ -10,7 +10,7 @@ interface CreateItemModalProps extends ModalProps {
   onCancel: () => void;
 };
 
-type ItemFormData = Pick<ItemData, 'title' | 'description' | 'priority'>;
+type ItemFormData = Pick<ItemData, 'title' | 'description' | 'priority' | 'type'>;
 
 const CreateItemModal = (props: CreateItemModalProps) => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -89,8 +89,27 @@ const CreateItemModal = (props: CreateItemModalProps) => {
           </div>
 
           <label
-              htmlFor="priority"
-              className="form__elementLabel"
+            htmlFor="type"
+            className="form__elementLabel"
+          >
+            Type
+          </label>
+
+          <div className="form__element">
+            <select
+              id="type"
+              name="type"
+              className="form__elementSelect"
+            >
+              <option value="task">Task</option>
+              <option value="feature">Feature</option>
+              <option value="bug">Bug</option>
+            </select>
+          </div>
+
+          <label
+            htmlFor="priority"
+            className="form__elementLabel"
           >
             Priority
           </label>

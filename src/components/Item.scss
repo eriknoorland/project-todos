@@ -48,11 +48,29 @@
   font-size: 14px;
 }
 
+.item__select {
+  margin: 0 8px 0 0;
+}
+
 .item__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 16px 0 0 0;
+}
+
+.item__footerLabels {
+  display: flex;
+  align-items: center;
+}
+
+.item__typeLabel {
+  margin: 0 8px 0 0;
+  padding: 4px 8px;
+  font-size: 14px;
+  text-transform: capitalize;
+  border-radius: 4px;
+  background: rgba(#fff, 0.5);
 }
 
 .item__priorityLabel {
