@@ -1,4 +1,4 @@
-const modifiers = (blockName: string, modifiers: string | undefined): string => {
+const modifiers = (blockName: string, modifiers: string | undefined = ''): string => {
   if (!modifiers) {
     return blockName;
   }
