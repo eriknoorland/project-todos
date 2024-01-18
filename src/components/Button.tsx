@@ -1,20 +1,17 @@
 import modifiers from '../utils/modifiers';
 import './Button.scss';
 
-interface ButtonProps extends React.PropsWithChildren {
-  onClick?: () => void;
-  className?: string;
-  type?: string;
+interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   modifiers?: 'action' | 'submit' | 'cancel';
 };
 
-const Button = (props: ButtonProps) => {
+const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button
       className={`${modifiers('button', props.modifiers)} ${props.className || ''}`}
       onClick={props.onClick}
     >
-      { props.children }
+      {props.children}
     </button>
   );
 };

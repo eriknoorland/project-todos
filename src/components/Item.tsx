@@ -5,10 +5,9 @@ import { ItemData, ItemStatus } from '../types';
 import ItemEditForm from './ItemEditForm';
 import './Item.scss';
 
-interface ItemProps {
+interface ItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   data: ItemData;
   status: ItemStatus;
-  className?: string;
   onItemEdit: (item: ItemData) => void;
   onItemDelete: (item: ItemData) => void;
 };
