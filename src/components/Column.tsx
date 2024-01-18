@@ -1,9 +1,9 @@
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { ItemData, ItemPriority, ItemStatus } from '../types';
 import Item from './Item';
 import './Column.scss';
 
-interface ColumnProps extends PropsWithChildren {
+interface ColumnProps {
   items: ItemData[];
   status: ItemStatus;
   onItemDrop: (itemId: string, status: string) => void;
@@ -13,7 +13,7 @@ interface ColumnProps extends PropsWithChildren {
 
 const Column = (props: ColumnProps) => {
   const filteredItems = props.items.filter(item => item.status === props.status);
-  const sortedItems = [...filteredItems].sort(sortByPriority);
+  const sortedItems = filteredItems.sort(sortByPriority);
   const [showDropPlaceholder, setShowDropPlaceholder] = useState(false);
 
   function handleDragEnter() {
