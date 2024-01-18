@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ItemData, ItemPriority, ItemStatus } from '../types';
 import Item from './Item';
+import itemPriorities from '../data/itemPriorities.json';
 import './Column.scss';
 
 interface ColumnProps {
@@ -39,7 +40,7 @@ const Column = (props: ColumnProps) => {
   }
 
   function sortByPriority(a: ItemData, b: ItemData) {
-    const priorities: ItemPriority[] = ['low', 'medium', 'high'];
+    const priorities: ItemPriority[] = itemPriorities.map(priority => priority.value as ItemPriority);
     const indexA = priorities.indexOf(a.priority);
     const indexB = priorities.indexOf(b.priority);
 
