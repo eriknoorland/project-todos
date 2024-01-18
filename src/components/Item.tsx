@@ -28,7 +28,7 @@ const Item = (props: ItemProps) => {
     setIsGrabbing(true);
   }
 
-  function handleDragEnd(event: React.DragEvent<HTMLDivElement>) {
+  function handleDragEnd() {
     setIsGrabbing(false);
   }
 
