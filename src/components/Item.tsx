@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { ItemData, ItemStatus } from '../types';
+import { ItemData } from '../types';
 import ItemEditForm from './ItemEditForm';
 import './Item.scss';
 
 interface ItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   data: ItemData;
-  status: ItemStatus;
   onItemEdit: (item: ItemData) => void;
   onItemDelete: (item: ItemData) => void;
 };
@@ -56,9 +55,10 @@ const Item = (props: ItemProps) => {
       className={`
         ${props.className}
         item
-        item--${props.status}
+        item--${props.data.status}
         ${isGrabbing ? 'item--is_grabbing' : ''}
       `}
+      data-testid="item"
     >
       {isEditing ?
         <ItemEditForm
@@ -68,11 +68,17 @@ const Item = (props: ItemProps) => {
         />
       :
         <>
-          <div className="item__title">
+          <div
+            className="item__title"
+            data-testid="itemTitle"
+          >
             {props.data.title}
           </div>
 
-          <p className="item__description">
+          <p
+            className="item__description"
+            data-testid="itemDescription"
+          >
             {props.data.description}
           </p>
 
@@ -99,6 +105,7 @@ const Item = (props: ItemProps) => {
               <span
                 className="item__editAction"
                 onClick={handleEditClick}
+                data-testid="itemEditButton"
               >
                 <FontAwesomeIcon icon={faPenToSquare} />
               </span>
@@ -106,6 +113,7 @@ const Item = (props: ItemProps) => {
               <span
                 className="item__deleteAction"
                 onClick={handleDeleteClick}
+                data-testid="itemDeleteButton"
               >
                 <FontAwesomeIcon icon={faTrash} />
               </span>
