@@ -10,6 +10,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       className={`${modifiers('button', props.modifiers)} ${props.className || ''}`}
       onClick={props.onClick}
+      data-testid="button"
     >
       {props.children}
     </button>
