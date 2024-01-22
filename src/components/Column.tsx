@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ItemData, ItemPriority, ItemStatus } from '../types';
 import Item from './Item';
+import makeSortItemsByPriority from '../utils/makeSortItemsByPriority';
 import itemPriorities from '../data/itemPriorities.json';
 import './Column.scss';
 
@@ -13,8 +14,9 @@ interface ColumnProps {
 };
 
 const Column = (props: ColumnProps) => {
+  const sortItemsByPriority = makeSortItemsByPriority(itemPriorities.map(p => p.value as ItemPriority));
   const filteredItems = props.items.filter(item => item.status === props.status);
-  const sortedItems = filteredItems.sort(sortByPriority);
+  const sortedItems = filteredItems.sort(sortItemsByPriority);
   const [showDropPlaceholder, setShowDropPlaceholder] = useState(false);
 
   function handleDragEnter() {
@@ -39,26 +41,16 @@ const Column = (props: ColumnProps) => {
     setShowDropPlaceholder(false);
   }
 
-  function sortByPriority(a: ItemData, b: ItemData) {
-    const priorities: ItemPriority[] = itemPriorities.map(priority => priority.value as ItemPriority);
-    const indexA = priorities.indexOf(a.priority);
-    const indexB = priorities.indexOf(b.priority);
-
-    if (indexA < indexB) {
-      return 1;
-    }
-    
-    if (indexA > indexB) {
-      return -1;
-    }
-
-    return 0;
-  }
-
   return (
-    <div className="column">
-      <div className="column__title">
-        {props.status.replace('_', ' ')} ({ filteredItems.length })
+    <div
+      className="column"
+      data-testid="column"
+    >
+      <div
+        className="column__title"
+        data-testid="columnTitle"
+      >
+        {props.status.replace('_', ' ')} ({ sortedItems.length })
       </div>
 
       <div
@@ -67,13 +59,13 @@ const Column = (props: ColumnProps) => {
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
+        data-testid="columnDropZone"
       >
         {sortedItems.map(item => {
           return <Item
             className="column__item"
             key={item.id}
             data={item}
-            status={props.status}
             onItemEdit={props.onItemEdit}
             onItemDelete={props.onItemDelete}
           />
