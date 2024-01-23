@@ -1,0 +1,11 @@
+.itemForm__buttons {
+  margin-top: 32px !important;
+}
+
+.itemForm__button {
+  margin: 0 8px 0 0;
+
+  &:last-child {
+    margin: 0;
+  }
+}

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { ItemData } from '../types';
-import ItemEditForm from './ItemEditForm';
+import { ItemData, ItemFormData } from '../types';
+import ItemForm from './ItemForm';
 import './Item.scss';
 
 interface ItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -38,8 +38,11 @@ const Item = (props: ItemProps) => {
     props.onItemDelete(props.data);
   }
 
-  function handleEditSave(item: ItemData) {
-    props.onItemEdit(item);
+  function handleEditSubmit(formData: ItemFormData) {
+    props.onItemEdit({
+      ...props.data,
+      ...formData,
+    });
     setIsEditing(false);
   }
 
@@ -61,9 +64,10 @@ const Item = (props: ItemProps) => {
       data-testid="item"
     >
       {isEditing ?
-        <ItemEditForm
+        <ItemForm
           data={props.data}
-          onSave={handleEditSave}
+          submitButtonLabel="Save"
+          onSubmit={handleEditSubmit}
           onCancel={handleEditCancel}
         />
       :

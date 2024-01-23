@@ -12,3 +12,5 @@ export interface ItemData {
   status: ItemStatus;
   priority: ItemPriority;
 }
+
+export type ItemFormData = Pick<ItemData, 'title' | 'description' | 'priority' | 'type'>;
