@@ -14,3 +14,7 @@ export interface ItemData {
 }
 
 export type ItemFormData = Pick<ItemData, 'title' | 'description' | 'priority' | 'type'>;
+
+export interface AutomatedTestProps {
+  ['data-testid']?: string;
+};

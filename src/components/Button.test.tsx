@@ -6,21 +6,21 @@ afterEach(() => {
 });
 
 test('should render the button component', () => {
-  render(<Button />);
+  render(<Button data-testid="button" />);
 
   const buttonElement = screen.getByTestId('button');
   expect(buttonElement).toBeInTheDocument();
 });
 
 test('should render the button component with the given content', () => {
-  render(<Button>Hello world!</Button>);
+  render(<Button data-testid="button">Hello world!</Button>);
   
   const buttonElement = screen.getByTestId('button');
   expect(buttonElement).toHaveTextContent('Hello world!');
 });
 
 test('should render the button component with the given class name', () => {
-  render(<Button className="testButton">Hello world!</Button>);
+  render(<Button data-testid="button" className="testButton">Hello world!</Button>);
   
   const buttonElement = screen.getByTestId('button');
   expect(buttonElement).toHaveClass('testButton');
@@ -29,7 +29,7 @@ test('should render the button component with the given class name', () => {
 test('should call the click handle function once', () => {
   const handleClick = jest.fn();
 
-  render(<Button onClick={handleClick} />);
+  render(<Button data-testid="button" onClick={handleClick} />);
   
   const buttonElement = screen.getByTestId('button');
   fireEvent.click(buttonElement);

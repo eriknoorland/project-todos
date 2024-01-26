@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { AutomatedTestProps } from '../types';
 import './Modal.scss';
 
-export interface ModalProps extends React.PropsWithChildren {
+export interface ModalProps extends AutomatedTestProps, React.PropsWithChildren {
   isOpen: boolean;
   onClose?: () => void;
 };
@@ -47,6 +48,7 @@ const Modal = (props: ModalProps) => {
       ref={ref}
       onKeyDown={handleKeyDown}
       className="modal"
+      data-testid={props['data-testid'] || ''}
     >
       <div
         className="modal__close"

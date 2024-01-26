@@ -29,6 +29,7 @@ const ItemForm = (props: ItemFormProps) => {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
+      data-testid="itemForm"
     >
       <div className="form__element">
         <label
@@ -44,6 +45,7 @@ const ItemForm = (props: ItemFormProps) => {
           name="title"
           className="form__elementInput"
           defaultValue={props.data?.title}
+          data-testid="itemFormTitleInput"
           required
         />
       </div>
@@ -63,6 +65,7 @@ const ItemForm = (props: ItemFormProps) => {
           rows={4}
           className="form__elementTextarea"
           defaultValue={props.data?.description}
+          data-testid="itemFormDescriptionInput"
           required
         ></textarea>
       </div>
@@ -123,6 +126,7 @@ const ItemForm = (props: ItemFormProps) => {
           modifiers="cancel"
           className="itemForm__button itemForm__button--submit"
           onClick={() => props.onCancel()}
+          data-testid="itemFormCancel"
         >
           Cancel
         </Button>
@@ -131,6 +135,7 @@ const ItemForm = (props: ItemFormProps) => {
           type="submit"
           modifiers="submit"
           className="itemForm__button itemForm__button--submit"
+          data-testid="itemFormSubmit"
         >
           {props.submitButtonLabel || 'Add'}
         </Button>

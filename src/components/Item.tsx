@@ -55,13 +55,8 @@ const Item = (props: ItemProps) => {
       draggable={true}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      className={`
-        ${props.className}
-        item
-        item--${props.data.status}
-        ${isGrabbing ? 'item--is_grabbing' : ''}
-      `}
-      data-testid="item"
+      className={`${props.className} item item--${props.data.status} ${isGrabbing ? 'item--is_grabbing' : ''}`}
+      data-testid={`item-${props.data.id}`}
     >
       {isEditing ?
         <ItemForm

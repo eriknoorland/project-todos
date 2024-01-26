@@ -22,7 +22,7 @@ test('should render the item component', () => {
     onItemDelete={() => {}}
   />);
 
-  const itemElement = screen.getByTestId('item');
+  const itemElement = screen.getByTestId('item-uid-1');
   expect(itemElement).toBeInTheDocument();
 });
 

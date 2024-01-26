@@ -65,6 +65,7 @@ function App() {
           modifiers="action"
           className="createButton"
           onClick={handleCreateClick}
+          data-testid="createButton"
         >
           <FontAwesomeIcon
             className="createButton__icon"

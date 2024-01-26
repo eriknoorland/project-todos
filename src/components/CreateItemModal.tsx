@@ -28,6 +28,7 @@ const CreateItemModal = (props: CreateItemModalProps) => {
     <Modal
       isOpen={props.isOpen}
       onClose={props.onClose}
+      data-testid="createItemModal"
     >
       <div className="createItemModal">
         <div className="createItemModal__title">

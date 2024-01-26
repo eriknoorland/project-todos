@@ -58,7 +58,7 @@ test('should render an item in the column', () => {
     />
   );
   
-  const itemElement = screen.getByTestId('item');
+  const itemElement = screen.getByTestId('item-uid-1');
   expect(itemElement).toBeInTheDocument();
 });
 
