@@ -1,21 +1,39 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ItemData, ItemStatus } from './types';
+import { ItemData, ItemStatus, ItemType } from './types';
+import CreateItemModal from './components/CreateItemModal';
 import Column from './components/Column';
 import Button from './components/Button';
-import CreateItemModal from './components/CreateItemModal';
+import Filter from './components/Filter';
+import itemTypes from './data/itemTypes.json';
 import './App.scss';
 
 function App() {
-  const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
   const columnStatuses = ['open', 'in_progress', 'done'];
+  const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
   const [items, setItems] = useState<ItemData[]>(initialItemsState);
+  const [filteredItems, setFilteredItems] = useState<ItemData[]>(items);
+  const [selectedFilters, setSelectedFilters] = useState<ItemType[]>([]);
   const [isCreateItemModalOpen, setIsCreateItemModalOpen] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem('projectTodos', JSON.stringify(items));
   }, [items]);
+
+  useEffect(() => {
+    let updatedFilteredItems = [...items];
+
+    if (selectedFilters.length) {
+      updatedFilteredItems= items.filter(({ type }) => selectedFilters.includes(type));
+    }
+
+    setFilteredItems(updatedFilteredItems);
+  }, [items, selectedFilters]);
+
+  function handleFilterChange(filters: ItemType[]) {
+    setSelectedFilters(filters);
+  }
 
   function handleItemDrop(itemId: string, status: string): void {
     setItems(items.map(item => {
@@ -74,6 +92,11 @@ function App() {
           
           Create new item
         </Button>
+
+        <Filter
+          types={itemTypes}
+          onChange={handleFilterChange}
+        />
       </header>
 
       <div className="columns">
@@ -81,7 +104,7 @@ function App() {
           return <Column
             status={columnStatus as ItemStatus}
             key={columnStatus}
-            items={items}
+            items={filteredItems}
             onItemDrop={handleItemDrop}
             onItemEdit={handleItemEdit}
             onItemDelete={handleItemDelete}
