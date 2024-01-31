@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ItemType } from '../types';
 import './Filter.scss';
 
@@ -11,7 +11,8 @@ interface FilterProps {
   }[];
 };
 
-const Filter = (props: FilterProps) => {
+const Filter = ({ types, onChange }: FilterProps) => {
+  const isInitialRender = useRef(true);
   const [selectedTypes, setSelectedTypes] = useState<ItemType[]>([]);
   
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -28,19 +29,28 @@ const Filter = (props: FilterProps) => {
   }
 
   useEffect(() => {
-    props.onChange([...selectedTypes]);
-  }, [selectedTypes]);
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+    
+    onChange([...selectedTypes]);
+  }, [onChange, selectedTypes]);
 
   return (
-    <div className="filter">
+    <div
+      className="filter"
+      data-testid="filter"
+    >
       <span className="filter__title">
         Filter type:
       </span>
 
-      {props.types.map((type) => {
+      {types.map((type) => {
         return <label
           key={type.id}
           className="filter__item"
+          data-testid={`filter-option-${type.value}`}
         >
             <input
               type="checkbox"

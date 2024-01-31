@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ItemData, ItemStatus, ItemType } from './types';
@@ -31,9 +31,9 @@ function App() {
     setFilteredItems(updatedFilteredItems);
   }, [items, selectedFilters]);
 
-  function handleFilterChange(filters: ItemType[]) {
+  const handleFilterChange = useCallback((filters: ItemType[]) => {
     setSelectedFilters(filters);
-  }
+  }, [setSelectedFilters]);
 
   function handleItemDrop(itemId: string, status: string): void {
     setItems(items.map(item => {
