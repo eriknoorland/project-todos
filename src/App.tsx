@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ItemData, ItemStatus, ItemType } from './types';
+import useLocalStorage from './hooks/useLocalStorage';
 import CreateItemModal from './components/CreateItemModal';
 import Column from './components/Column';
 import Button from './components/Button';
@@ -11,14 +12,14 @@ import './App.scss';
 
 function App() {
   const columnStatuses = ['open', 'in_progress', 'done'];
-  const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
-  const [items, setItems] = useState<ItemData[]>(initialItemsState);
+  const { setItem, getItem } = useLocalStorage('projectTodos');
+  const [items, setItems] = useState<ItemData[]>(getItem() || []);
   const [selectedFilters, setSelectedFilters] = useState<ItemType[]>([]);
   const [isCreateItemModalOpen, setIsCreateItemModalOpen] = useState(false);
 
   useEffect(() => {
-    window.localStorage.setItem('projectTodos', JSON.stringify(items));
-  }, [items]);
+    setItem(items);
+  }, [setItem, items]);
 
   const handleFilterChange = useCallback((filters: ItemType[]) => {
     setSelectedFilters(filters);
