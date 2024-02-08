@@ -13,23 +13,12 @@ function App() {
   const columnStatuses = ['open', 'in_progress', 'done'];
   const initialItemsState = JSON.parse(window.localStorage.getItem('projectTodos') || '[]');
   const [items, setItems] = useState<ItemData[]>(initialItemsState);
-  const [filteredItems, setFilteredItems] = useState<ItemData[]>(items);
   const [selectedFilters, setSelectedFilters] = useState<ItemType[]>([]);
   const [isCreateItemModalOpen, setIsCreateItemModalOpen] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem('projectTodos', JSON.stringify(items));
   }, [items]);
-
-  useEffect(() => {
-    let updatedFilteredItems = [...items];
-
-    if (selectedFilters.length) {
-      updatedFilteredItems= items.filter(({ type }) => selectedFilters.includes(type));
-    }
-
-    setFilteredItems(updatedFilteredItems);
-  }, [items, selectedFilters]);
 
   const handleFilterChange = useCallback((filters: ItemType[]) => {
     setSelectedFilters(filters);
@@ -75,6 +64,14 @@ function App() {
   function handleCreateItemModalClose() {
     setIsCreateItemModalOpen(false);
   }
+
+  const filteredItems = items.filter(({ type }) => {
+    if (!selectedFilters.length) {
+      return true;
+    }
+
+    return selectedFilters.includes(type);
+  });
 
   return (
     <div className="app">
